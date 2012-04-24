@@ -95,12 +95,12 @@ def stringDuplicates(term, origTerms, simThresh=0.8, n=100, stripped=False, recu
 			else: continue
 		return duplicates
 	else:
-		_stripChars = ['a', 'e', 'i', 'o', 'u', 'h', ' ']
+		unwantedChars = ['a', 'e', 'i', 'o', 'u', 'h', ' ']
 		strippedTerms = []
 		if stripped:
-			term = _stripChars(term, _stripChars)
+			term = _stripChars(term, unwantedChars)
 			for i in terms:
-				strippedTerms.append(_stripChars(i, _stripChars))
+				strippedTerms.append(_stripChars(i, unwantedChars))
 		else:
 			strippedTerms = terms
 		l = len(strippedTerms)
@@ -123,24 +123,3 @@ def stringDuplicates(term, origTerms, simThresh=0.8, n=100, stripped=False, recu
 						duplicates.extend(nextNearest)
 						del nextNearest
 		return list(set(duplicates))
-
-#if __name__ == "__main__":
-#	filepath = "/home/gopal/workspace/rasikas/raaga.com/data/raagaSiteStatistics.yaml"
-#	data = yaml.load(file(filepath))
-#	terms = []
-#	terms.extend(data["composers"])
-#	terms = list(set(terms))
-#	
-#	analyzed = []
-#	uniqTerms = []
-#	for term in terms:
-#		if term not in analyzed:
-#			print term
-#			uniqTerms.append(term)
-#			terms.remove(term)
-#			dups = stringDuplicates(term, terms, simThresh=0.8, recursion=1)
-#			analyzed.extend(dups)
-#			analyzed = list(set(analyzed))
-#		
-#	print uniqTerms
-#	print len(uniqTerms)
