@@ -1,0 +1,36 @@
+Purpose:
+--------
+
+This is a simple program to find out the wrong/other spellings of a 
+given word. It works with two string distance measures - longest common
+subsequence, and damerau levenshtein distance. 
+
+Further, the core strength lies in being able to search not only for
+direct matches, but also for the matches of matches and so on. This is
+particularly useful in the cases such as these:
+
+Sowrashtram matches Sourashtram but not Saurashtram.
+But Sourashtram matches Saurashtram.
+
+Of course, loosening the threshold can help, but also decreases the 
+precision. Therefore the solution is to search with "tight" parameters,
+but with an extensive search mechanism.
+
+Usage:
+------
+
+>>> import stringDuplicates
+>>> terms = ["kopala", "gopal", "george", "mohammed", "arjuna"]
+>>> stringDuplicates.stringDuplicates("gopala", terms, simThresh=0.8, recursion=1)
+['gopal', 'kopala']
+
+The two crucial parameters, as can be understood from the description,
+are simThresh and recursion.
+
+
+Contact Info:
+-------------
+
+Gopala Krishna Koduri
+gopala.koduri@gmail.com
+http://tidbits.co.in
