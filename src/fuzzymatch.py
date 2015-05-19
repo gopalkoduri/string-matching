@@ -80,6 +80,7 @@ def lookup_single(term, pool, thresh=0.8, n=100, stripped=False, recursion=2):
 
     Return values: [match1, match2, ...]
     """
+    pool = list(pool[:])
     unwanted_chars = ['a', 'e', 'i', 'o', 'u', 'h', ' ']
     stripped_pool = []
     if stripped:
@@ -104,7 +105,7 @@ def lookup_single(term, pool, thresh=0.8, n=100, stripped=False, recursion=2):
         if s >= thresh:
             matches.append(term_match)
             if recursion > 1:
-                next_nearest = lookup(term_match, pool, thresh, n, stripped, recursion - 1)
+                next_nearest = lookup(term_match, pool, thresh, n, stripped, recursion-1)
                 if next_nearest:
                     matches.extend(next_nearest)
                     del next_nearest
@@ -136,7 +137,8 @@ def lookup(terms, pool, thresh=0.8, n=10, stripped=False, recursion=2):
     Return values:
     A dictionary with of the format {"term": [match1, match2, ...]}
     """
-    pool = pool[:]
+    pool = list(pool)
+    terms = list(terms)
     if recursion <= 0:
         return
 
